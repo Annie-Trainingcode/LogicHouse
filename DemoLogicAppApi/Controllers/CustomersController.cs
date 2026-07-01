@@ -139,9 +139,16 @@ namespace DemoAngularCrudApi.Controllers
             {
                 return NotFound();
             }
+            try
+            {
 
-            _context.Customers.Remove(customer);
-            await _context.SaveChangesAsync();
+                _context.Customers.Remove(customer);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                return NotFound();
+            }
 
             return NoContent();
         }

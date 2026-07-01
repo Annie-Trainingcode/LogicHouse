@@ -66,6 +66,10 @@ stages:
   displayName: "Deploy to Prod"
   dependsOn: Deploy_QA
   jobs:
-  - job: DeployProd
-    steps:
-    - script: echo "Deploying to Prod"
+  - deployment: DeployProd   # ✅ must be 'deployment' (not job)
+    environment: 'prod'      # ✅ THIS maps to your Environment
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo "Deploying to Prod"
